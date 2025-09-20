@@ -1,0 +1,10 @@
+streamlit
+langchain
+langchain-community
+langchain-openai
+langdetect
+deep-translator
+python-dotenv
+wikipedia
+arxiv
+duckduckgo-search

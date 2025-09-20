@@ -3,7 +3,7 @@ import time
 import streamlit as st
 from langchain.memory import ConversationBufferMemory
 from langchain.agents import initialize_agent, AgentType
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage, AIMessage
 from langchain_community.tools import WikipediaQueryRun, ArxivQueryRun, DuckDuckGoSearchRun
 from langchain_community.utilities import WikipediaAPIWrapper, ArxivAPIWrapper, DuckDuckGoSearchAPIWrapper
