@@ -81,7 +81,7 @@ def main():
     <style>
     .stApp {
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                   url("https://www.nasa.gov/wp-content/uploads/2025/09/1-honolulu-skyline-16.jpg") no-repeat center center fixed;
+                   url("https://images.squarespace-cdn.com/content/v1/6418b0756bfdeb13a8c56fcf/c976ed04-1ebc-4a48-b0fc-ac2dd8d8995c/Nakalembe_RSGraphic.png?format=1500w") no-repeat center center fixed;
         background-size: cover;
         color: white;
     }
