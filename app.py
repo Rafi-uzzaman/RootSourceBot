@@ -81,7 +81,7 @@ def main():
     <style>
     .stApp {
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                   url("https://images.squarespace-cdn.com/content/v1/6418b0756bfdeb13a8c56fcf/3c08aa66-87e9-4cd7-a755-361b499544cf/LandsatImage.jpg?format=3500w") no-repeat center center fixed;
+                   url("https://assets.science.nasa.gov/dynamicimage/assets/science/esd/multimedia/images-of-change/FestiveFields_NC_20141019_after_2048px-95.jpg") no-repeat center center fixed;
         background-size: cover;
         color: white;
     }
