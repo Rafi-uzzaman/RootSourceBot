@@ -76,18 +76,120 @@ def get_conversational_agent():
 
 # Streamlit Chat UI
 def main():
-    # Set Background Image
+    # Set Background Image and Styling
     page_bg_img = '''
     <style>
     .stApp {
-        background: url("https://www.nasa.gov/wp-content/uploads/2025/09/1-honolulu-skyline-16.jpg") no-repeat center center fixed;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                   url("https://www.nasa.gov/wp-content/uploads/2025/09/1-honolulu-skyline-16.jpg") no-repeat center center fixed;
         background-size: cover;
-        background-blend-mode: darken; /* Ensures text remains readable */
-        overlay:#ffffff80; /* White overlay with 50% opacity for better readability */
-        tcolor: white; /* Default text color to white for visibility */
+        color: white;
     }
+    
+    .stApp > div {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        padding: 20px;
+        margin: 10px;
+        backdrop-filter: blur(5px);
+    }
+    
     .stChatMessage {
-        background: #ffffff; /* White background for chat messages */
+        background: rgba(255, 255, 255, 0.2) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        padding: 15px !important;
+        border-radius: 20px !important;
+        margin-bottom: 15px !important;
+        color: #000 !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Force all text in chat messages to be black */
+    .stChatMessage p, .stChatMessage div, .stChatMessage span, .stChatMessage * {
+        color: #000 !important;
+    }
+    
+    /* User message specific styling */
+    div[data-testid="user-message"] {
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+    
+    div[data-testid="user-message"] p, 
+    div[data-testid="user-message"] div, 
+    div[data-testid="user-message"] span, 
+    div[data-testid="user-message"] * {
+        color: #000 !important;
+    }
+    
+    /* Assistant message specific styling */
+    div[data-testid="assistant-message"] {
+        background: rgba(255, 255, 255, 0.25) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    }
+    
+    div[data-testid="assistant-message"] p, 
+    div[data-testid="assistant-message"] div, 
+    div[data-testid="assistant-message"] span, 
+    div[data-testid="assistant-message"] * {
+        color: #000 !important;
+    }
+    }
+    
+    h1, h2, h3 {
+        color: white !important;
+        text-align: center !important;
+        font-weight: bold !important;
+        background: none !important;
+        -webkit-text-fill-color: white !important;
+    }
+    
+    /* Ensure titles are always white and visible */
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
+        font-family: 'Dosis', sans-serif !important;
+        italic: true !important;
+    }
+    .stWrite {
+        font-family: 'Montserrat', sans-serif !important;
+        italic: true !important;
+    }
+    .stButton > button {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 25px !important;
+        padding: 12px 25px !important;
+        font-weight: bold !important;
+        font-size: 16px !important;
+        box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(17, 153, 142, 0.6) !important;
+    }
+    
+        .stTextInput > div > div > input {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        border-radius: 25px !important;
+    }
+    
+    /* Logo styling */
+    .logo-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    
+    .stChatMessage {
+        background: #F1F0F0; /* Light grey for assistant messages */
         padding: 10px;
         border-radius: 15px;
         margin-bottom: 10px;
@@ -96,18 +198,68 @@ def main():
     .stChatMessage.user {
         background: #DCF8C6; /* Light green for user messages */
     }
-    .stTitle, .stSubheader {
-        color: white; /* Title and subtitle in white for visibility */
-        align: center;
+
+
+    
+    /* Success and warning messages */
+    .stSuccess, .stWarning, .stError {
+        border-radius: 15px !important;
+        border: none !important;
+        color: white !important;
+        font-weight: bold !important;
     }
-</style>
-
+    
+    .stSuccess {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+        box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4) !important;
+    }
+    
+    .stWarning {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+        box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4) !important;
+    }
+    
+    .stError {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%) !important;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4) !important;
+    }
+    
+    /* Sidebar styling if any */
+    .stSidebar {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* st.write styling - italic and curly font */
+    .stMarkdown, .stText {
+        font-style: italic !important;
+        color: white !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+    }
+    
+    /* Specific targeting for st.write content */
+    div[data-testid="stMarkdownContainer"] p {
+        font-style: italic !important;
+        color: white !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+    }
+    </style>
     '''
-    st.title("RootSource AI")
-    st.subheader("Ask your farming-related questions in any language, and get accurate answers!") 
-
     st.markdown(page_bg_img, unsafe_allow_html=True)
     
+    # Add logo at the top
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        try:
+            st.image("RootSourcelogo.png", width=400, use_container_width=False)
+        except:
+            st.write("🌱 RootSource AI 🌱")  # Fallback if logo doesn't load
+    
+    st.title("RootSource AI")
+    st.subheader("Ask your farming-related questions in any language, and get accurate answers!")
+    st.write("Developed by : Team 'BlueDot'") 
+    st.divider()
+    
+
 
     if st.button("Reset Conversation"):
         st.session_state.chat_memory.clear()
@@ -122,7 +274,7 @@ def main():
         st.chat_message(message["role"]).markdown(message["content"])
 
     # Get user input
-    prompt = st.chat_input("Ask your farming-related question here (in any language)...")
+    prompt = st.chat_input(" Ask your farming-related question here (in any language)..... ")
 
     if prompt:
         st.chat_message("user").markdown(prompt)
